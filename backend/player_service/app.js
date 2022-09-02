@@ -3,16 +3,16 @@ const amqp = require("amqplib");
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
 // TODO: AMQP (RabbitMQ) connection
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("player_service");
 });
 
 app.listen(PORT, () => {
-  console.log("Example app listening on port 3000!");
+  console.log(`player_service listening on port ${PORT}!`);
 });

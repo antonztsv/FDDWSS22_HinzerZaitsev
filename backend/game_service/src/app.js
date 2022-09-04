@@ -44,7 +44,7 @@ class Player {
   }
 }
 
-app.post("/games", (req, res) => {
+app.post("/api/game", (req, res) => {
   const name = req.body.name || "Anonymous"
   const game = new Game()
   const player = new Player(name)
@@ -57,6 +57,6 @@ app.post("/games", (req, res) => {
 })
 
 const PORT = process.env.PORT || 8000
-app.listen(PORT, () => {
-  console.log(`card_service listening on port ${PORT}!`)
+httpServer.listen(PORT, () => {
+  console.log(`game_service listening on port ${PORT}!`)
 })

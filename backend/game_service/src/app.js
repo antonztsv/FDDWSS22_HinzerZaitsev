@@ -1,27 +1,45 @@
+import * as dotenv from "dotenv"
+dotenv.config()
+
 import express from "express"
 const app = express()
 import cors from "cors"
 import { nanoid } from "nanoid"
+
 import { createServer } from "http"
 import { Server } from "socket.io"
 import { instrument } from "@socket.io/admin-ui"
 
+import amqplib from "amqplib"
+
+// socket.io setup
+// #####################################
+
 const httpServer = createServer(app)
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-    credentials: true,
-    transports: ["websocket"],
+    origin: ["http://localhost:3000", "https://admin.socket.io"],
   },
 })
 
+// admin ui
 instrument(io, {
   auth: false,
 })
 
+// express middleware
+// #####################################
+
 app.use(cors())
 app.use(express.json())
+
+// amqp (rabbitmq) connection
+// #####################################
+
+// TODO
+
+// data
+// #####################################
 
 const games = []
 
@@ -50,6 +68,9 @@ class Player {
     this.name = name
   }
 }
+
+// express routes
+// #####################################
 
 app.get("/", (req, res) => {
   res.send("game_service")
@@ -81,16 +102,22 @@ app.post("/api/game", (req, res) => {
   res.json(game)
 })
 
+// express server start
+// #####################################
+
 const PORT = process.env.PORT || 8000
 httpServer.listen(PORT, () => {
   console.log(`game_service listening on port ${PORT}!`)
 })
+
+// socket.io events
+// #####################################
 
 io.on("connection", (socket) => {
   console.log("Client connected: " + socket.id)
 
   socket.on("ping", () => {
     console.log("ping received")
-    socket.emit("pong", "test")
+    socket.emit("pong", "game_service")
   })
 })

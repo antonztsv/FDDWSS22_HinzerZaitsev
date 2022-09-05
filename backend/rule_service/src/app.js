@@ -10,9 +10,9 @@ app.use(express.json())
 // TODO: AMQP (RabbitMQ) connection
 
 app.get("/", (req, res) => {
-  res.send("card_service")
+  res.send("rule_service")
 })
 
 app.listen(PORT, () => {
-  console.log(`card_service listening on port ${PORT}!`)
+  console.log(`rule_service listening on port ${PORT}!`)
 })

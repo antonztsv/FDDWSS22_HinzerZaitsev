@@ -9,10 +9,8 @@ import { instrument } from "@socket.io/admin-ui"
 const httpServer = createServer(app)
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
+    origin: ["http://localhost:3000", "https://admin.socket.io"],
     credentials: true,
-    transports: ["websocket"],
   },
 })
 

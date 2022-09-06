@@ -10,7 +10,7 @@ import { createServer } from "http"
 import { Server } from "socket.io"
 import { instrument } from "@socket.io/admin-ui"
 
-import amqplib from "amqplib"
+import { connect, sendRabbitMessage } from "./rabbit.js"
 
 // socket.io setup
 // #####################################
@@ -36,7 +36,10 @@ app.use(express.json())
 // amqp (rabbitmq) connection
 // #####################################
 
-// TODO
+start()
+async function start() {
+  await connect()
+}
 
 // data
 // #####################################
@@ -73,6 +76,7 @@ class Player {
 // #####################################
 
 app.get("/", (req, res) => {
+  sendRabbitMessage("userCreated", "Hello from game_service")
   res.send("game_service")
 })
 
@@ -114,6 +118,14 @@ httpServer.listen(PORT, () => {
 // #####################################
 
 io.on("connection", (socket) => {
+  games.forEach((game) => {
+    socket.join(game.id)
+  })
+
+  socket.on("playCard", ({ message, room }) => {
+    console.log("playCard", message, room)
+  })
+
   console.log("Client connected: " + socket.id)
 
   socket.on("ping", () => {

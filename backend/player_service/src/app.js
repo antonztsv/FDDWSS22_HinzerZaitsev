@@ -4,12 +4,13 @@ dotenv.config()
 import express from "express"
 const app = express()
 import cors from "cors"
+import { nanoid } from "nanoid"
 
 import { createServer } from "http"
 import { Server } from "socket.io"
 import { instrument } from "@socket.io/admin-ui"
 
-import amqplib from "amqplib"
+import { connect, sendRabbitMessage } from "./rabbit.js"
 
 // socket.io setup
 // #####################################
@@ -35,13 +36,38 @@ app.use(express.json())
 // amqp (rabbitmq) connection
 // #####################################
 
-// TODO
+start()
+async function start() {
+  await connect()
+}
+
+// data
+// #####################################
+
+const players = []
+
+class Player {
+  constructor(name) {
+    this.id = nanoid(5)
+    this.name = name
+  }
+}
 
 // express routes
 // #####################################
 
 app.get("/", (req, res) => {
+  sendRabbitMessage("player_service", "Hello from the backend!")
   res.send("player_service")
+})
+
+app.post("/api/player", (req, res) => {
+  const name = req.body.name || "Anonymous"
+
+  const player = new Player(name)
+  players.push(player)
+
+  res.json(player)
 })
 
 // express server start

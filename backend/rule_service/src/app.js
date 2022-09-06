@@ -9,7 +9,8 @@ import { createServer } from "http"
 import { Server } from "socket.io"
 import { instrument } from "@socket.io/admin-ui"
 
-import amqplib from "amqplib"
+import { connect, sendRabbitMessage } from "./rabbit.js"
+import { send } from "process"
 
 // socket.io setup
 // #####################################
@@ -35,12 +36,16 @@ app.use(express.json())
 // amqp (rabbitmq) connection
 // #####################################
 
-// TODO
+start()
+async function start() {
+  await connect()
+}
 
 // express routes
 // #####################################
 
 app.get("/", (req, res) => {
+  sendRabbitMessage("rule_service", "Hello from the rule_service!")
   res.send("rule_service")
 })
 

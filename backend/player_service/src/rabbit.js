@@ -5,7 +5,7 @@ import amqp from "amqplib"
 let channel
 let connection
 
-const amqpUrl = process.env.AMQP_URL
+const amqpUrl = process.env.AMQP_URL || "amqp://guest:guest@rabbitmq:5672"
 
 async function connect() {
   try {

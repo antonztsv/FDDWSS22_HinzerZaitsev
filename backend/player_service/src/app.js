@@ -70,6 +70,10 @@ app.post("/api/player", (req, res) => {
   res.json(player)
 })
 
+app.get("/api/player", (req, res) => {
+  res.json(players)
+})
+
 // express server start
 // #####################################
 

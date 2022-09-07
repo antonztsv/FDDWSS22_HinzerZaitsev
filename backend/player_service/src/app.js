@@ -39,11 +39,50 @@ app.use(express.json())
 const rabbit = jackrabbit(process.env.AMQP_URL)
 const exchange = rabbit.default()
 const queue = exchange.queue({ name: "task_queue", durable: true })
+const unpublishedMessages = []
 
-queue.consume((data, ack) => {
-  console.log("[AMQP] Message received from " + data.service)
-  ack()
+// check if rabbitmq is connected
+rabbit.on("connected", () => {
+  console.log("[AMQP] RabbitMQ connection established")
+
+  // consume messages from queue
+  queue.consume((data, ack) => {
+    console.log(
+      "[AMQP] Message received from " + data.service + ": ",
+      data.message
+    )
+    ack()
+  })
 })
+
+rabbit.on("reconnected", () => {
+  console.log("[AMQP] RabbitMQ connection re-established")
+
+  // publish unpublished messages
+  unpublishedMessages.forEach((message) => {
+    console.log("[AMQP] Publishing offline message")
+    publishMessage(message)
+  })
+
+  queue.consume((data, ack) => {
+    console.log(
+      "[AMQP] Message received from " + data.service + ": ",
+      data.message
+    )
+    ack()
+  })
+})
+
+const publishMessage = (message) => {
+  // check  if rabbitmq is connected
+  if (rabbit.isConnectionReady()) {
+    console.log("[AMQP] Publishing message", message)
+    exchange.publish(message, { key: "task_queue" })
+  } else {
+    console.log("[AMQP] RabbitMQ not connected, saving message for later")
+    unpublishedMessages.push(message)
+  }
+}
 
 // data
 // #####################################
@@ -61,7 +100,10 @@ class Player {
 // #####################################
 
 app.get("/", (req, res) => {
-  exchange.publish({ service: "player_service" }, { key: "task_queue" })
+  publishMessage({
+    service: "player_service",
+    message: "Hello from player_service",
+  })
 
   res.send("player_service")
 })

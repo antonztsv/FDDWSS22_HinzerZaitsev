@@ -9,7 +9,7 @@ import { createServer } from "http"
 import { Server } from "socket.io"
 import { instrument } from "@socket.io/admin-ui"
 
-import { emitEvent, onEvent } from "./rabbit.js"
+import jackrabbit from "@pager/jackrabbit"
 
 // socket.io setup
 // #####################################
@@ -35,22 +35,21 @@ app.use(express.json())
 // amqp (rabbitmq) event handling
 // #####################################
 
-const q = "testEvent"
-emitEvent(q, JSON.stringify({ id: 12345, name: "testUser" }))
+const rabbit = jackrabbit(process.env.AMQP_URL)
+const exchange = rabbit.default()
+const queue = exchange.queue({ name: "task_queue", durable: true })
 
-setInterval(() => {
-  console.info(" [x] Sending event...")
-  emitEvent(q, JSON.stringify({ id: 12345, name: "testUser" }))
-}, 3000)
-
-onEvent(q, (msg) => {
-  console.log(" [x] Received event: ", q, JSON.parse(msg))
+queue.consume((data, ack) => {
+  console.log("[AMQP] Message received from " + data.service)
+  ack()
 })
 
 // express routes
 // #####################################
 
 app.get("/", (req, res) => {
+  exchange.publish({ service: "rule_service" }, { key: "task_queue" })
+
   res.send("rule_service")
 })
 

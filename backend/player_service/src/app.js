@@ -41,40 +41,45 @@ const exchange = rabbit.default()
 const queue = exchange.queue({ name: "task_queue", durable: true })
 const unpublishedMessages = []
 
-// check if rabbitmq is connected
 rabbit.on("connected", () => {
   console.log("[AMQP] RabbitMQ connection established")
 
-  // consume messages from queue
-  queue.consume((data, ack) => {
-    console.log(
-      "[AMQP] Message received from " + data.service + ": ",
-      data.message
-    )
-    ack()
+  queue.consume((message, ack, nack) => {
+    // ADD EVENTS
+    if (message.event === "test") {
+      console.log("[AMQP] Message received", message)
+      ack()
+    } else {
+      console.log("[AMQP] Unknown message received", message)
+      nack()
+    }
   })
 })
 
 rabbit.on("reconnected", () => {
   console.log("[AMQP] RabbitMQ connection re-established")
 
-  // publish unpublished messages
-  unpublishedMessages.forEach((message) => {
-    console.log("[AMQP] Publishing offline message")
-    publishMessage(message)
-  })
+  if (unpublishedMessages.length > 0) {
+    unpublishedMessages.forEach((message) => {
+      console.log("[AMQP] Publishing offline message")
+      publishMessage(message)
+    })
+    unpublishedMessages.length = 0
+  }
 
-  queue.consume((data, ack) => {
-    console.log(
-      "[AMQP] Message received from " + data.service + ": ",
-      data.message
-    )
-    ack()
+  queue.consume((message, ack, nack) => {
+    // ADD EVENTS
+    if (message.event === "test") {
+      console.log("[AMQP] Message received", message)
+      ack()
+    } else {
+      console.log("[AMQP] Unknown message received", message)
+      nack()
+    }
   })
 })
 
 const publishMessage = (message) => {
-  // check  if rabbitmq is connected
   if (rabbit.isConnectionReady()) {
     console.log("[AMQP] Publishing message", message)
     exchange.publish(message, { key: "task_queue" })
@@ -101,8 +106,8 @@ class Player {
 
 app.get("/", (req, res) => {
   publishMessage({
-    service: "player_service",
-    message: "Hello from player_service",
+    event: "newPlayer",
+    payload: { id: "12345", name: "John" },
   })
 
   res.send("player_service")

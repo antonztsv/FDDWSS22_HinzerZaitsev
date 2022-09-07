@@ -7,30 +7,16 @@ import cors from "cors"
 
 import jwt from "jsonwebtoken"
 
-import { connect, sendRabbitMessage } from "./rabbit.js"
-
 // express middleware
 // #####################################
 
 app.use(cors())
 app.use(express.json())
 
-// amqp (rabbitmq) connection
-// #####################################
-
-start()
-async function start() {
-  await connect()
-}
-
 // express routes
 // #####################################
 
 app.get("/", (req, res) => {
-  sendRabbitMessage(
-    "authentication_service",
-    "hello from authentication_service"
-  )
   res.send("authentication_service")
 })
 

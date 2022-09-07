@@ -10,8 +10,6 @@ import { createServer } from "http"
 import { Server } from "socket.io"
 import { instrument } from "@socket.io/admin-ui"
 
-import { connect, sendRabbitMessage } from "./rabbit.js"
-
 // socket.io setup
 // #####################################
 
@@ -33,14 +31,6 @@ instrument(io, {
 app.use(cors())
 app.use(express.json())
 
-// amqp (rabbitmq) connection
-// #####################################
-
-start()
-async function start() {
-  await connect()
-}
-
 // data
 // #####################################
 
@@ -57,7 +47,6 @@ class Player {
 // #####################################
 
 app.get("/", (req, res) => {
-  sendRabbitMessage("player_service", "Hello from the backend!")
   res.send("player_service")
 })
 

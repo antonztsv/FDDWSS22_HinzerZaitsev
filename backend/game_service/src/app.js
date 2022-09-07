@@ -7,10 +7,13 @@ import cors from "cors"
 import { nanoid } from "nanoid"
 
 import { createServer } from "http"
+
 import { Server } from "socket.io"
 import { instrument } from "@socket.io/admin-ui"
+import { createAdapter } from "@socket.io/redis-adapter"
+import { createClient } from "redis"
 
-import { connect, sendRabbitMessage } from "./rabbit.js"
+import jwt from "jsonwebtoken"
 
 // socket.io setup
 // #####################################
@@ -33,14 +36,6 @@ instrument(io, {
 
 app.use(cors())
 app.use(express.json())
-
-// amqp (rabbitmq) connection
-// #####################################
-
-start()
-async function start() {
-  await connect()
-}
 
 // data
 // #####################################
@@ -77,7 +72,6 @@ class Player {
 // #####################################
 
 app.get("/", (req, res) => {
-  sendRabbitMessage("userCreated", "Hello from game_service")
   res.send("game_service")
 })
 

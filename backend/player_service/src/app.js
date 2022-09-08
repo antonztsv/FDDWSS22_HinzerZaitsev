@@ -12,6 +12,14 @@ import { instrument } from "@socket.io/admin-ui"
 
 import jackrabbit from "@pager/jackrabbit"
 
+// helpers
+import {
+  setNewPlayerToken,
+  ensureTokenIsSet,
+  resetPlayerToken,
+} from "./helpers/waitForToken.js"
+import { players, Player } from "./helpers/db.js"
+
 // socket.io setup
 // #####################################
 
@@ -63,9 +71,11 @@ rabbit.on("reconnected", () => {
 
 const consumeMessages = () => {
   queue.consume((message, ack, nack) => {
-    // ADD EVENTS
+    // ADD CUSTOM EVENTS BELOW
     if (message.event === "playerToken") {
       console.log("[AMQP] Message received", message)
+
+      setNewPlayerToken(message.payload.token)
 
       ack()
       return
@@ -85,37 +95,42 @@ const publishMessage = (message) => {
   }
 }
 
-// data
-// #####################################
-
-const players = []
-
-class Player {
-  constructor(name) {
-    this.id = nanoid(5)
-    this.name = name
-  }
-}
-
 // express routes
 // #####################################
 
 app.get("/", (req, res) => {
   publishMessage({
-    event: "newPlayer",
-    payload: { id: "12345", name: "John" },
+    event: "test",
+    payload: { message: "Hello from player_service" },
   })
 
   res.send("player_service")
 })
 
-app.post("/api/player", (req, res) => {
+app.post("/api/player", async (req, res) => {
   const name = req.body.name || "Anonymous"
+  let token
 
   const player = new Player(name)
-  players.push(player)
 
-  res.json(player)
+  publishMessage({
+    event: "newPlayer",
+    payload: { id: player.id, name: player.name },
+  })
+
+  if (rabbit.isConnectionReady()) {
+    try {
+      token = await ensureTokenIsSet()
+      resetPlayerToken()
+      players.push(player)
+    } catch (error) {
+      console.error(error)
+    }
+  } else {
+    token = ""
+  }
+
+  res.json({ player, token })
 })
 
 // express server start

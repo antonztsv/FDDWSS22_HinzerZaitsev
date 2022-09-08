@@ -7,7 +7,8 @@ import cors from "cors"
 
 import jackrabbit from "@pager/jackrabbit"
 
-import { generateToken } from "./utils/token.js"
+// helpers
+import { generateToken } from "./helpers/token.js"
 
 // express middleware
 // #####################################
@@ -20,11 +21,7 @@ app.use(express.json())
 
 const rabbit = jackrabbit(process.env.AMQP_URL)
 const exchange = rabbit.default()
-const queue = exchange.queue({
-  name: "task_queue",
-  durable: false,
-  consumerTag: "authentication_service",
-})
+const queue = exchange.queue({ name: "task_queue", durable: false })
 const unpublishedMessages = []
 
 rabbit.on("connected", () => {
@@ -49,7 +46,7 @@ rabbit.on("reconnected", () => {
 
 const consumeMessages = () => {
   queue.consume((message, ack, nack) => {
-    // ADD EVENTS
+    // ADD CUSTOM EVENTS BELOW
     if (message.event === "newPlayer") {
       console.log("[AMQP] Message received", message)
       const token = generateToken(message.payload)

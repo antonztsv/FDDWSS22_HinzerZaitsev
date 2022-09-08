@@ -62,7 +62,7 @@ rabbit.on("reconnected", () => {
 
 const consumeMessages = () => {
   queue.consume((message, ack, nack) => {
-    // ADD EVENTS
+    // ADD CUSTOM EVENTS BELOW
     if (message.event === "test") {
       console.log("[AMQP] Message received", message)
       ack()

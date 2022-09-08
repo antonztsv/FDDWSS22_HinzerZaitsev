@@ -12,6 +12,9 @@ import { instrument } from "@socket.io/admin-ui"
 
 import jackrabbit from "@pager/jackrabbit"
 
+// helpers
+import { games, Game } from "./helpers/db.js"
+
 // socket.io setup
 // #####################################
 
@@ -63,7 +66,7 @@ rabbit.on("reconnected", () => {
 
 const consumeMessages = () => {
   queue.consume((message, ack, nack) => {
-    // ADD EVENTS
+    // ADD CUSTOM EVENTS BELOW
     if (message.event === "test") {
       console.log("[AMQP] Message received", message)
       ack()
@@ -81,37 +84,6 @@ const publishMessage = (message) => {
   } else {
     console.log("[AMQP] RabbitMQ not connected, saving message for later")
     unpublishedMessages.push(message)
-  }
-}
-
-// data
-// #####################################
-
-const games = []
-
-class Game {
-  constructor() {
-    this.id = nanoid(5)
-    this.players = []
-  }
-
-  addPlayer(player) {
-    this.players.push(player)
-  }
-
-  removePlayer(player) {
-    this.players = this.players.filter((p) => p.id !== player.id)
-  }
-
-  getPlayers() {
-    return this.players
-  }
-}
-
-class Player {
-  constructor(name) {
-    this.id = nanoid(5)
-    this.name = name
   }
 }
 

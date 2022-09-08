@@ -10,6 +10,8 @@ import { createServer } from "http"
 import { Server } from "socket.io"
 import { instrument } from "@socket.io/admin-ui"
 
+import jwt from "jsonwebtoken"
+
 // socket.io setup
 // #####################################
 
@@ -50,17 +52,41 @@ app.get("/", (req, res) => {
   res.send("player_service")
 })
 
+function generateAccessToken(user) {
+  return jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1800s" })
+}
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"]
+
+  const token = authHeader && authHeader.split(" ")[1]
+
+  if (token == null) return res.sendStatus(401)
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    console.log(err)
+
+    if (err) return res.sendStatus(403)
+
+    req.user = user
+
+    next()
+  })
+}
+
 app.post("/api/player", (req, res) => {
   const name = req.body.name || "Anonymous"
 
   const player = new Player(name)
   players.push(player)
 
-  res.json(player)
+  const token = generateAccessToken({ player })
+  res.json(token)
 })
 
-app.get("/api/player", (req, res) => {
+app.get("/api/player", authenticateToken, (req, res) => {
   res.json(players)
+  // res.send("Show Players")
 })
 
 // express server start

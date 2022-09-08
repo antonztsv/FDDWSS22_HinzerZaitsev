@@ -7,6 +7,10 @@ const Layout = styled.main`
   gap: 1rem;
   max-width: 1280px;
   margin: 0 auto;
+
+  * {
+    grid-columns: 1 / 13;
+  }
 `
 
 export default Layout

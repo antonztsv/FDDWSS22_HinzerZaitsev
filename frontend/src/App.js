@@ -5,21 +5,27 @@ import "./styles/App.css"
 
 import { UserContext } from "./context/UserContext"
 
-import Login from "./routes/Login"
-import Dashbaord from "./routes/Dashbaord"
+import Login from "./pages/Login"
+import Dashbaord from "./pages/Dashbaord"
 
-import AllGames from "./routes/AllGames"
-import Game from "./routes/Game"
-import NotFound from "./routes/NotFound"
+import AllGames from "./pages/AllGames"
+import Game from "./pages/Game"
+import NotFound from "./pages/NotFound"
+
+const URL = "http://localhost:8001/api/player"
 
 function App() {
   const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    setUser(window.localStorage.getItem("jwtToken"))
+  }, [])
 
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ user, setUser }}>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={user ? <Dashbaord /> : <Login />} />
           <Route path="/game">
             <Route index element={<AllGames />} />
             <Route path=":id" element={<Game />} />

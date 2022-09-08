@@ -5,9 +5,9 @@ import express from "express"
 const app = express()
 import cors from "cors"
 
-import jwt from "jsonwebtoken"
-
 import jackrabbit from "@pager/jackrabbit"
+
+import { generateToken } from "./utils/token.js"
 
 // express middleware
 // #####################################
@@ -20,23 +20,17 @@ app.use(express.json())
 
 const rabbit = jackrabbit(process.env.AMQP_URL)
 const exchange = rabbit.default()
-const queue = exchange.queue({ name: "task_queue", durable: true })
+const queue = exchange.queue({
+  name: "task_queue",
+  durable: false,
+  consumerTag: "authentication_service",
+})
 const unpublishedMessages = []
 
 rabbit.on("connected", () => {
   console.log("[AMQP] RabbitMQ connection established")
 
-  queue.consume((message, ack, nack) => {
-    // ADD EVENTS
-    if (message.event === "newPlayer") {
-      console.log("[AMQP] Message received", message)
-      ack()
-      return
-    } else {
-      console.log("[AMQP] Unknown message received", message)
-      nack()
-    }
-  })
+  consumeMessages()
 })
 
 rabbit.on("reconnected", () => {
@@ -50,18 +44,31 @@ rabbit.on("reconnected", () => {
     unpublishedMessages.length = 0
   }
 
+  consumeMessages()
+})
+
+const consumeMessages = () => {
   queue.consume((message, ack, nack) => {
     // ADD EVENTS
     if (message.event === "newPlayer") {
       console.log("[AMQP] Message received", message)
+      const token = generateToken(message.payload)
+
+      publishMessage({
+        event: "playerToken",
+        payload: {
+          token,
+          player: message.payload,
+        },
+      })
+
       ack()
       return
-    } else {
-      console.log("[AMQP] Unknown message received", message)
-      nack()
     }
+    nack()
+    return
   })
-})
+}
 
 const publishMessage = (message) => {
   if (rabbit.isConnectionReady()) {

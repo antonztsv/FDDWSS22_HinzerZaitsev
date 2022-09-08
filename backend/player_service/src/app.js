@@ -38,22 +38,13 @@ app.use(express.json())
 
 const rabbit = jackrabbit(process.env.AMQP_URL)
 const exchange = rabbit.default()
-const queue = exchange.queue({ name: "task_queue", durable: true })
+const queue = exchange.queue({ name: "task_queue", durable: false })
 const unpublishedMessages = []
 
 rabbit.on("connected", () => {
   console.log("[AMQP] RabbitMQ connection established")
 
-  queue.consume((message, ack, nack) => {
-    // ADD EVENTS
-    if (message.event === "test") {
-      console.log("[AMQP] Message received", message)
-      ack()
-    } else {
-      console.log("[AMQP] Unknown message received", message)
-      nack()
-    }
-  })
+  consumeMessages()
 })
 
 rabbit.on("reconnected", () => {
@@ -67,17 +58,22 @@ rabbit.on("reconnected", () => {
     unpublishedMessages.length = 0
   }
 
+  consumeMessages()
+})
+
+const consumeMessages = () => {
   queue.consume((message, ack, nack) => {
     // ADD EVENTS
-    if (message.event === "test") {
+    if (message.event === "playerToken") {
       console.log("[AMQP] Message received", message)
+
       ack()
-    } else {
-      console.log("[AMQP] Unknown message received", message)
-      nack()
+      return
     }
+    nack()
+    return
   })
-})
+}
 
 const publishMessage = (message) => {
   if (rabbit.isConnectionReady()) {

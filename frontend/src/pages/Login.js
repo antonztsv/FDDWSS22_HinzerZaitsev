@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 import Layout from "../components/styled/Layout"
+import Container from "../components/styled/Container"
 import Title from "../components/styled/Title"
 import Form from "../components/styled/Form"
 
@@ -42,21 +43,25 @@ const Login = () => {
 
   return (
     <Layout>
-      <Title>Name: {name}</Title>
-      <Form onSubmit={submitHandler}>
-        <label>
-          <input
-            type="text"
-            required
-            name={`Username`}
-            value={name}
-            placeholder="Nickname"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </Form>
-      <h2>{user ? JSON.stringify(user, null, 2) : null}</h2>
+      <Container>
+        <Title>Name: {name}</Title>
+        <Form onSubmit={submitHandler}>
+          <label>
+            <input
+              type="text"
+              required
+              name={`Username`}
+              value={name}
+              placeholder="Nickname"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </Form>
+      </Container>
+      {/* <Container>
+        <p>{user ? JSON.stringify(user, null, 2) : null}</p>
+      </Container> */}
     </Layout>
   )
 }

@@ -6,11 +6,13 @@ import Container from "../components/styled/Container"
 import Title from "../components/styled/Title"
 import Form from "../components/styled/Form"
 
+import { saveToStorage } from "../helpers/saveToStorage"
+
 import { fetchPOST } from "../helpers/fetchData.js"
 
 import { UserContext } from "../context/UserContext"
 
-const Login = () => {
+const Login = (props) => {
   const navigate = useNavigate()
   const url = "http://localhost:8001/api/player"
 
@@ -35,11 +37,22 @@ const Login = () => {
     }
     const data = await fetchPOST(url, body)
 
-    window.localStorage.setItem("jwtToken", data)
-    setUser(data)
+    saveToStorage("token", data.token)
+    saveToStorage("name", data.player.name)
+    saveToStorage("id", data.player.id)
+
+    // save info to context
+    user.token = data.token
+    user.name = data.player.name
+    user.id = data.player.id
+    setUser({ ...user })
+
+    // console.log(data.token)
 
     // navigate(`/game/${data.id}`)
   }
+
+  // TODO: Protected Routes
 
   return (
     <Layout>
@@ -56,8 +69,12 @@ const Login = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <button type="submit">Submit</button>
+          <button type="submit">Login</button>
         </Form>
+      </Container>
+      <Container>
+        <button onClick={() => console.log(user)}>Get State</button>
+        <button onClick={() => localStorage.clear()}>Clear localStorage</button>
       </Container>
       {/* <Container>
         <p>{user ? JSON.stringify(user, null, 2) : null}</p>

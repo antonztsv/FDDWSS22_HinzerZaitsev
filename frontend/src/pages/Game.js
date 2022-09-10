@@ -1,11 +1,13 @@
-import React from "react"
+import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
+import { UserContext } from "../context/UserContext"
 
 const Game = (props) => {
-  const { id } = useParams()
+  const { user, setUser } = useContext(UserContext)
+
   return (
     <div>
-      <h1>My Game: {id}</h1>
+      <h1>My Game: {user.gameId}</h1>
     </div>
   )
 }

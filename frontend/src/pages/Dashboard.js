@@ -20,7 +20,7 @@ const Dashbaord = () => {
       <Container>
         <Title>User: {user.name}</Title>
         <p>{user.id}</p>
-        <button onClick={() => console.log(user ? true : false)}>Get State</button>
+        <button onClick={() => console.log(user.id ? user : user)}>Get State</button>
         <button onClick={() => (localStorage.clear(), navigate("/", { replace: true }))}>Clear localStorage</button>
       </Container>
     </Layout>

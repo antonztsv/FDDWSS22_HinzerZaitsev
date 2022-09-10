@@ -32,6 +32,7 @@ const Game = (props) => {
   }
 
   useEffect(() => {
+    setRoom(user.gameId)
     socket.on("receive_message", (data) => {
       setmessageReceived(data.message)
     })

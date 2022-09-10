@@ -43,16 +43,16 @@ export const startSocketIO = (io) => {
     })
 
     socket.on("send_message_room", (data) => {
-      console.log(data)
-      console.log(data.room)
+      console.log("A", data)
+      console.log("B", data.room)
       socket.to(data.room)
       socket.to(data.room).emit("receive_message_room", data)
     })
 
     socket.on("send_message", (data) => {
       console.log(data)
-      // socket.broadcast.emit("receive_message", data)
-      socket.emit("receive_message", data)
+      socket.broadcast.emit("receive_message", data)
+      // socket.emit("receive_message", data)
     })
   })
 

@@ -38,7 +38,8 @@ const Dashbaord = () => {
     <Layout>
       <Container>
         <Title>User: {user.name}</Title>
-        <p>{user.id}</p>
+        <p>User ID: {user.id}</p>
+        <p>Game ID: {user.gameId}</p>
         <button onClick={() => console.log(user.id ? user : user)}>Get State</button>
         <button onClick={() => (localStorage.clear(), navigate("/", { replace: true }))}>Clear localStorage</button>
         <button onClick={() => handleNewGame(user.token)}>new Game</button>

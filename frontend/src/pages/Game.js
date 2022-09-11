@@ -15,16 +15,17 @@ const socket = io.connect(`http://localhost:8000`)
 const Game = () => {
   const navigate = useNavigate()
   const { user, setUser, game, setGame } = useContext(Context)
+  const [deck, setDeck] = useState([])
 
   function handleLeaveGame() {
-    console.log("Leave Game")
+    console.log("leave_game")
     socket.emit("leave_game", game.id)
     setGame({ id: "", joined: false, started: false, players: [""] })
     navigate("/")
   }
 
   function handleStartGame() {
-    console.log("Start Game")
+    console.log("start_game")
     socket.emit("start_game", game.id)
   }
 
@@ -35,12 +36,14 @@ const Game = () => {
     socket.emit("join_game", game.id)
 
     socket.on("player_joined", (players) => {
+      console.log("player_joined")
       console.log(players)
       game.players = players
       setGame({ ...game })
     })
 
     socket.on("player_left", (players) => {
+      console.log("player_left")
       console.log(players)
       game.players = players
       setGame({ ...game })
@@ -53,12 +56,14 @@ const Game = () => {
     })
 
     socket.on("game_started", (data) => {
+      console.log("game_started")
       game.started = data.started
+      setDeck(data.deck)
       setGame({ ...game })
     })
 
     socket.on("disconnect", () => {
-      console.log("disconnected")
+      console.log("disconnect")
       handleLeaveGame()
     })
 
@@ -78,6 +83,7 @@ const Game = () => {
           <Container>
             <h1>Running Game</h1>
           </Container>
+          <button onClick={() => console.log("Deck: ", deck)}>Get Deck</button>
         </RunningGame>
       ) : (
         <GameLobby>

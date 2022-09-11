@@ -60,8 +60,6 @@ export const startSocketIO = (io) => {
       if (game) {
         game.players = game.players.filter((player) => player.id !== socket.decoded_token.id)
 
-        // io.in(socket.id).socketsLeave(gameId)
-
         if (game.players.length === 0) {
           games.splice(games.indexOf(game), 1)
         }
@@ -70,7 +68,6 @@ export const startSocketIO = (io) => {
       } else {
         console.log("Game not found")
       }
-      // socket.disconnect()
     })
 
     socket.on("start_game", (gameId) => {
@@ -85,28 +82,21 @@ export const startSocketIO = (io) => {
       }
     })
 
-    // socket.on("send_message_room", (data) => {
-    //   socket.to(data.room).emit("receive_message_room", data)
-    // })
-
-    // socket.on("send_message", (data) => {
-    //   console.log("data in send_message", data)
-    //   socket.broadcast.emit("receive_message", data)
-    // })
-
     socket.on("disconnect", () => {
       console.log("Client disconnected: " + socket.id)
 
       let game = games.find((game) => game.players.find((player) => player.id === socket.decoded_token.id))
       console.log(game)
 
-      game.players = game.players.filter((player) => player.id !== socket.decoded_token.id)
+      if (game) {
+        game.players = game.players.filter((player) => player.id !== socket.decoded_token.id)
 
-      if (game.players.length === 0) {
-        games.splice(games.indexOf(game), 1)
+        if (game.players.length === 0) {
+          games.splice(games.indexOf(game), 1)
+        }
+
+        io.to(game.id).emit("player_left", game.players)
       }
-
-      io.to(game.id).emit("disconnect_from_socket", game.players)
 
       socket.disconnect()
     })

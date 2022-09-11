@@ -52,23 +52,22 @@ const Game = () => {
       setGame({ ...game })
     })
 
-    socket.on("game_started", () => {
-      game.started = true
+    socket.on("game_started", (data) => {
+      game.started = data.started
       setGame({ ...game })
     })
 
-    window.addEventListener("onbeforeunload", handleLeaveGame)
+    socket.on("disconnect", () => {
+      console.log("disconnected")
+      handleLeaveGame()
+    })
+
     return () => {
       console.log("unmounted")
       socket.off("player_joined")
       socket.off("player_left")
       socket.off("game_started")
-
-      socket.on("disconnect", () => {
-        console.log("disconnected")
-        handleLeaveGame()
-      })
-      window.removeEventListener("onbeforeunload", handleLeaveGame)
+      handleLeaveGame()
     }
   }, [socket])
 
@@ -84,6 +83,7 @@ const Game = () => {
         <GameLobby>
           <Container>
             <h1>My Game: {game.id}</h1>
+            <h2>Me: {user.name}</h2>
           </Container>
           <Container>
             <button onClick={handleStartGame}>Start Game</button>

@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom"
 import { Context } from "../context/Context"
 import io from "socket.io-client"
 
+import Card from "../components/Card"
+import Hand from "../components/styled/Hand"
 import Layout from "../components/styled/Layout"
 import Container from "../components/styled/Container"
 import RunningGame from "./RunningGame"
@@ -15,7 +17,9 @@ const socket = io.connect(`http://localhost:8000`)
 const Game = () => {
   const navigate = useNavigate()
   const { user, setUser, game, setGame } = useContext(Context)
-  const [deck, setDeck] = useState([])
+  const [deckSize, setDeckSize] = useState(0)
+  const [discardPile, setDiscardPile] = useState([])
+  const [hand, setHand] = useState([])
 
   function handleLeaveGame() {
     console.log("leave_game")
@@ -27,6 +31,24 @@ const Game = () => {
   function handleStartGame() {
     console.log("start_game")
     socket.emit("start_game", game.id)
+  }
+
+  function handleDrawCard(amount) {
+    // draw ${amount} card from DRAW PILE
+    socket.emit("draw_card", amount)
+    console.log("draw card")
+  }
+
+  function handlePlayCard(card) {
+    // place one card to the DISCARD PILE
+    console.log("play_card")
+
+    socket.emit("play_card", card, game.id)
+    // id, name, currentHand
+  }
+
+  function handleCheckHand() {
+    //
   }
 
   useEffect(() => {
@@ -49,17 +71,36 @@ const Game = () => {
       setGame({ ...game })
     })
 
+    socket.on("receive_player_state")
+
     socket.on("disconnect_from_socket", (players) => {
       console.log("disconnect_from_socket")
       game.players = players
       setGame({ ...game })
     })
 
+    socket.on("played_card", (card) => {
+      //
+      console.log("played_card")
+    })
+
+    // socket.on("new_deck_size")
+
     socket.on("game_started", (data) => {
-      console.log("game_started")
+      console.log("game_started", data)
       game.started = data.started
-      setDeck(data.deck)
       setGame({ ...game })
+      setDeckSize(data.deckSize)
+      setDiscardPile(data.discardPile)
+
+      socket.on("give_start_hand", (data) => {
+        // get 7 cards
+        // hand = data
+
+        game.hand = data.playerHand
+        game.players = data.players
+        setGame({ ...game })
+      })
     })
 
     socket.on("disconnect", () => {
@@ -82,8 +123,34 @@ const Game = () => {
         <RunningGame>
           <Container>
             <h1>Running Game</h1>
+            <button onClick={() => console.log("Deck: ", deckSize)}>Get Deck</button>
+            <button onClick={() => console.log("Hand: ", game.hand)}>Get Hand</button>
+            <button onClick={() => console.log("Discard Pile: ", discardPile)}>Get Discard Pile:</button>
+            <button onClick={() => console.log("State: ", game)}>Get State</button>
           </Container>
-          <button onClick={() => console.log("Deck: ", deck)}>Get Deck</button>
+          <Container>
+            <h2>Players:</h2>
+            {game.players.map((value, index) => (
+              <div key={index}>
+                <h5>{value.name}</h5>
+                <p>{value.handSize}</p>
+              </div>
+            ))}
+          </Container>
+          <Container>
+            <Hand>
+              {game.hand.map((value, index) => {
+                return (
+                  <Card key={index}>
+                    <h4>Color: {value.color}</h4>
+                    <h4>Number: {value.number}</h4>
+                    <h4>Method: {value.method}</h4>
+                    <input type="button" onClick={() => handlePlayCard(value)} />
+                  </Card>
+                )
+              })}
+            </Hand>
+          </Container>
         </RunningGame>
       ) : (
         <GameLobby>

@@ -9,6 +9,7 @@ export class Game {
     this.players = []
     this.started = false
     this.deck = new Deck()
+    this.discardPile = []
   }
 
   addPlayer(player) {
@@ -26,11 +27,10 @@ export class Game {
 
 class Card {
   constructor(color, number, method) {
-    this.card = {
-      color,
-      number,
-      method,
-    }
+    this.color = color
+    this.number = number
+    this.method = method
+    this.id
   }
 }
 
@@ -57,7 +57,7 @@ class Deck {
 
     // create 0 cards
     for (let i = 0; i < 4; i++) {
-      this.cards.push(new Card(colors[i], 0))
+      this.cards.push(new Card(colors[i], 0, null))
     }
 
     // create action cards
@@ -74,6 +74,11 @@ class Deck {
       this.cards.push(new Card("black", null, "wild"))
       this.cards.push(new Card("black", null, "draw4"))
     }
+
+    // generate id for each card
+    for (let i = 0; i < this.cards.length; i++) {
+      this.cards[i].id = i
+    }
   }
 
   shuffle() {
@@ -85,6 +90,10 @@ class Deck {
 
   draw() {
     return this.cards.pop()
+  }
+
+  size() {
+    return this.cards.length
   }
 }
 

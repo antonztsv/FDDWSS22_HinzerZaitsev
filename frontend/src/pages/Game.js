@@ -24,7 +24,7 @@ const Game = () => {
   function handleLeaveGame() {
     console.log("leave_game")
     socket.emit("leave_game", game.id)
-    setGame({ id: "", joined: false, started: false, players: [""] })
+    setGame({ id: "", joined: false, started: false, players: [], hand: [] })
     navigate("/")
   }
 

@@ -10,7 +10,8 @@ export const initSocketIO = (app) => {
   const httpServer = createServer(app)
   const io = new Server(httpServer, {
     cors: {
-      origin: ["http://localhost:3000", "https://admin.socket.io"],
+      // origin: ["http://localhost:3000", "https://admin.socket.io", "https://uno.sator.app/"],
+      origin: ["*"],
     },
   })
 

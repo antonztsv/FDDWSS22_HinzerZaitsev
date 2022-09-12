@@ -80,17 +80,19 @@ export const startSocketIO = (io) => {
       const game = games.find((game) => game.id === gameId)
 
       if (game) {
-        game.started = true
+        if (!game.started) {
+          game.started = true
 
-        // draw 7 cards for each player
-        game.players.forEach((player) => {
-          for (let i = 0; i < 7; i++) {
-            player.hand.push(game.deck.draw())
-          }
-        })
+          // draw 7 cards for each player
+          game.players.forEach((player) => {
+            for (let i = 0; i < 7; i++) {
+              player.hand.push(game.deck.draw())
+            }
+          })
 
-        // draw 1 card for the discard pile
-        game.discardPile.push(game.deck.draw())
+          // draw 1 card for the discard pile
+          game.discardPile.push(game.deck.draw())
+        }
 
         io.to(gameId).emit("game_started", {
           started: game.started,

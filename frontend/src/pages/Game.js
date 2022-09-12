@@ -28,6 +28,7 @@ const Game = () => {
   function handleStartGame() {
     console.log("start_game")
     socket.emit("start_game", game.id)
+    //im backend (game.started ? false : startGame() )
   }
 
   function handleDrawCard(amount) {
@@ -82,7 +83,6 @@ const Game = () => {
     })
 
     // socket.on("new_deck_size")
-
 
     // TODO:
     // game can only be started once, check on server if game has been started before

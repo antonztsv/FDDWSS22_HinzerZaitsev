@@ -14,6 +14,7 @@ const StyledCard = styled.label`
 
 const Card = (props) => {
   return <StyledCard color={props.value.color}>{props.children}</StyledCard>
+
 }
 
 export default Card

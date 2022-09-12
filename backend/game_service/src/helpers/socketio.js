@@ -92,13 +92,19 @@ export const startSocketIO = (io) => {
 
           // draw 1 card for the discard pile
           game.discardPile.push(game.deck.draw())
-        }
 
-        io.to(gameId).emit("game_started", {
-          started: game.started,
-          deckSize: game.deck.size(),
-          discardPile: game.discardPile,
-        })
+          io.to(gameId).emit("game_started", {
+            started: game.started,
+            deckSize: game.deck.size(),
+            discardPile: game.discardPile,
+          })
+        } else {
+          console.log("Game already started")
+
+          io.to(gameId).emit("game_started", {
+            error: "Game already started",
+          })
+        }
 
         const allClients = io.sockets.adapter.rooms.get(gameId)
 

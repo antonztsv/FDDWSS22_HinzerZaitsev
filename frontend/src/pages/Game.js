@@ -28,7 +28,6 @@ const Game = () => {
   function handleStartGame() {
     console.log("start_game")
     socket.emit("start_game", game.id)
-    //im backend (game.started ? false : startGame() )
   }
 
   function handleDrawCard(amount) {
@@ -93,7 +92,6 @@ const Game = () => {
       setGame({ ...game })
       setDeckSize(data.deckSize)
       setDiscardPile(data.discardPile)
-
       socket.on("give_start_hand", (data) => {
         // get 7 cards
         // hand = data

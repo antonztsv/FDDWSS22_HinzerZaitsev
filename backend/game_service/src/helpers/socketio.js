@@ -151,7 +151,22 @@ export const startSocketIO = (io) => {
             // check if the player has won
             if (player.hand.length === 0) {
               game.started = false
+
+              // reset player hands
+              game.players.forEach((player) => {
+                player.hand = []
+              })
+
+              // reset deck
+              game.deck = new Deck()
+              game.deck.create()
+              game.deck.shuffle()
+
+              // reset discard pile
+              game.discardPile = []
+
               io.to(gameId).emit("game_ended", { started: game.started, winner: player.name })
+
               return
             }
 
@@ -162,7 +177,6 @@ export const startSocketIO = (io) => {
             })
 
             io.to(gameId).emit("played_card", {
-              // card,
               playerId: player.id,
               players,
             })

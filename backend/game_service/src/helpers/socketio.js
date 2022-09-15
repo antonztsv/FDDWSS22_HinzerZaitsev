@@ -209,6 +209,7 @@ export const startSocketIO = (io) => {
             return { ...rest, handSize: hand.length }
           })
 
+          io.to(gameId).emit("get_hands", { players })
           // send updated hand to player who drew a card
           io.to(socket.id).emit("get_hands", { hand: player.hand, players })
 

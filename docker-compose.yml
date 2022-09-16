@@ -16,8 +16,6 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "8000:8000"
-    restart: on-failure
-    command: bash -c "cp .env.example .env"
     volumes:
       - ./backend/game_service:/usr/src/app/game_service/src
     depends_on:
@@ -29,8 +27,6 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "8002:8002"
-    restart: on-failure
-    command: bash -c "cp .env.example .env"
     volumes:
       - ./backend/rule_service:/usr/src/app/rule_service/src
     depends_on:
@@ -42,8 +38,6 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "8001:8001"
-    restart: on-failure
-    command: bash -c "cp .env.example .env"
     volumes:
       - ./backend/player_service:/usr/src/app/player_service/src
     depends_on:
@@ -55,8 +49,6 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "8003:8003"
-    restart: on-failure
-    command: bash -c "cp .env.example .env"
     volumes:
       - ./backend/authentication_service:/usr/src/app/authentication_service/src
     depends_on:
@@ -67,12 +59,3 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-  mongo:
-    container_name: mongo
-    image: "mongo"
-    ports:
-      - "27017:27017"
-    volumes:
-      - "mongodb:/data/db"
-volumes:
-  mongodb:

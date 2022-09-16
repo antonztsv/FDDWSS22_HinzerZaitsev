@@ -28,19 +28,17 @@
   <p align="center">
     Projekt im Modul Frameworks, Dienste und Daten im Web
     <br />
-    <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev"><strong>Dokumentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev">View Demo</a>
-    ·
+    <!-- <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev">Demo</a>
     <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev/issues">Request Feature</a>
+    <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev/issues">Request Feature</a> -->
   </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
-<details>
+<!-- <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -63,19 +61,24 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
-</details>
+</details> -->
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## Über das Projekt
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](#)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `antonztsv`, `FDDWSS22_HinzerZaitsev`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+Für das Modul Frameworks, Dienste und Daten im Web wurde als Projekt das Kartenspiel UNO in vereinfachter Form entwickelt und umgesetzt.
+Dabei wurde der Fokus auf eine in Microservices aufgeteilte ereignisgesteuerte Architektur gelegt.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Im folgenden wird die Installation des Projektes sowie der Umgang mit der Anwendung erläutert.
 
-### Built With
+<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
+
+### Technologie
+
+<br>
 
 - ![Node.js Badge](https://img.shields.io/badge/Node.js-393?logo=nodedotjs&logoColor=fff&style=for-the-badge)
 - ![RabbitMQ Badge](https://img.shields.io/badge/RabbitMQ-F60?logo=rabbitmq&logoColor=fff&style=for-the-badge)
@@ -85,18 +88,18 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 - ![npm Badge](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff&style=for-the-badge)
 - ![Git Badge](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff&style=for-the-badge)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+## Erste Schritte
 
 Im folgenden wird erläutert, wie das Projekt lokal gestartet werden kann. Befolgen Sie einfach den Schritten.
 
 <!-- This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps. -->
 
-### Prerequisites
+### Voraussetzungen
 
 Folgende Programme werden benötigt:
 
@@ -108,20 +111,24 @@ Folgende Programme werden benötigt:
 
 ### Installation
 
-1. Clone the repo
+1. Das Repository klonen
    ```sh
    git clone https://github.com/antonztsv/FDDWSS22_HinzerZaitsev.git
    ```
-2. Run config script or copy .env.example files for every backend service to a .env file manually
+2. In den Ordner wechseln
+   ```sh
+   cd FDDWSS22_HinzerZaitsev
+   ```
+3. Skript ausführen oder die `.env.example` Dateien in jedem Backend Service in `.env` umbennenen
    ```sh
    ./copy-env.sh
    ```
-3. Docker Container mit docker-compose im root Verzeichnis starten
+4. Anwendungen mit `docker-compose` starten
    ```sh
    docker-compose up -d --build
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 
@@ -139,7 +146,7 @@ Das Frontend kann über [`http://localhost:3000`](http://localhost:3000) aufgeru
 4. Spiel starten
 5. Spiel beenden
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
 
 <!-- ROADMAP -->
 
@@ -152,7 +159,7 @@ Das Frontend kann über [`http://localhost:3000`](http://localhost:3000) aufgeru
 
 See the [open issues](https://github.com/antonztsv/FDDWSS22_HinzerZaitsev/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right">(<a href="#readme-top">An den Anfang</a>)</p> -->
 
 <!-- CONTRIBUTING -->
 
@@ -169,7 +176,7 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
 
 <!-- LICENSE -->
 
@@ -177,18 +184,18 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<p align="right">(<a href="#readme-top">An den Anfang</a>)</p> -->
 
 <!-- CONTACT -->
 
-## Contact
+## Kontakt
 
 Calvin Hinzer - calvin.hinzer@smail.th-koeln.de
 Anton Zaitsev - anton.zaitsev@smail.th-koeln.de
 
-Project Link: [https://github.com/antonztsv/FDDWSS22_HinzerZaitsev](https://github.com/antonztsv/FDDWSS22_HinzerZaitsev)
+Projekt Link: [https://github.com/antonztsv/FDDWSS22_HinzerZaitsev](https://github.com/antonztsv/FDDWSS22_HinzerZaitsev)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 
@@ -198,7 +205,7 @@ Project Link: [https://github.com/antonztsv/FDDWSS22_HinzerZaitsev](https://gith
 - []()
 - []() -->
 
-<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+<!-- <p align="right">(<a href="#readme-top">An den Anfang</a>)</p> -->
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

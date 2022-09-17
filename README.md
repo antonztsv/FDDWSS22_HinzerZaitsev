@@ -1,115 +1,147 @@
 <a name="readme-top"></a>
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-
-<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
+[![Issues][issues-shield]][issues-url] -->
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev">
-    <img src="./docs/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="./docs/images/logo.png" alt="Logo" width="100" height="100">
   </a>
 
-<h3 align="center">UNO Kartenspiel</h3>
+<h3 align="center"><strong>UNO Kartenspiel</strong></h3>
 
   <p align="center">
     Projekt im Modul Frameworks, Dienste und Daten im Web
     <br />
-    <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev"><strong>Dokumentation »</strong></a>
     <br />
-    <br />
-    <!-- <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev">Demo</a>
-    <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev/issues">Report Bug</a>
-    <a href="https://github.com/antonztsv/FDDWSS22_HinzerZaitsev/issues">Request Feature</a> -->
+    <p><strong>Calvin Hinzer</strong> - <a href="mailto:calvin.hinzer@smail.th-koeln.de ">calvin.hinzer@smail.th-koeln.de </a></p>
+    <p><strong>Anton Zaitsev</strong> - <a href="mailto:anton.zaitsev@smail.th-koeln.de">anton.zaitsev@smail.th-koeln.de</a></p>
+    <br>
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-<!-- <details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details> -->
-
 <!-- ABOUT THE PROJECT -->
 
-## Über das Projekt
+## **Über das Projekt**
 
 [![Product Name Screen Shot][product-screenshot]](#)
 
 Für das Modul Frameworks, Dienste und Daten im Web wurde als Projekt das Kartenspiel UNO in vereinfachter Form entwickelt und umgesetzt.
 Dabei wurde der Fokus auf eine in Microservices aufgeteilte ereignisgesteuerte Architektur gelegt.
 
-Im folgenden wird die Installation des Projektes sowie der Umgang mit der Anwendung erläutert.
+<p align="right">(<a href="#readme-top">Zum Anfang</a>)</p>
 
-<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
+### Spielregeln
 
-### Technologie
+Für das Spiel gibt es ein eigenes Kartendeck mit 108 Karten. Die Karten haben vier Farben (blau, grün, rot, gelb) und die Werte von neun bis null. Hinzu kommen drei Aktionskarten in jeder Farbe sowie acht schwarze Aktionskarten. Da jede Karte bis auf die Null und die schwarzen Aktionskarten doppelt sind, kommen am Ende 108 Karten zusammen.
+
+Jeder Spieler erhält zu Beginn des Spiels sieben Karten auf die Hand. Anschließend werden reihum Karten abgelegt. Karten können dabei nur auf dieselbe Farbe oder Werte abgelegt werden. Aktionskarten haben dabei unterschiedliche Funktionen (Zwei ziehen, Aussetzen, Richtungswechsel und Vier ziehen, Farbwechsel).
+Gewonnen hat der Spieler, der alle Karten als erstes abgelegt hat.
+
+<p align="right">(<a href="#readme-top">Zum Anfang</a>)</p>
+
+### **Verwendete Technologien**
 
 <br>
 
-- ![Node.js Badge](https://img.shields.io/badge/Node.js-393?logo=nodedotjs&logoColor=fff&style=for-the-badge)
-- ![RabbitMQ Badge](https://img.shields.io/badge/RabbitMQ-F60?logo=rabbitmq&logoColor=fff&style=for-the-badge)
-- ![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=for-the-badge)
-- ![Docker Badge](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=for-the-badge)
-- ![Socket.io Badge](https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=fff&style=for-the-badge)
-- ![npm Badge](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff&style=for-the-badge)
-- ![Git Badge](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff&style=for-the-badge)
+![Node.js Badge](https://img.shields.io/badge/Node.js-393?logo=nodedotjs&logoColor=fff&style=for-the-badge)
+![RabbitMQ Badge](https://img.shields.io/badge/RabbitMQ-F60?logo=rabbitmq&logoColor=fff&style=for-the-badge)
+![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=for-the-badge)
+![Docker Badge](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=for-the-badge)
+![Socket.io Badge](https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=fff&style=for-the-badge)
+![npm Badge](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff&style=for-the-badge)
+![Git Badge](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff&style=for-the-badge)
 
-<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
+Die einzelnen Microservices im Backend wurden mit dem serverseitigem [Javascript Framework Node.js](https://nodejs.org/en/) umgesetzt. Dieses ermöglicht, vor allem durch die Einbindung von [externen NPM-Packages](https://www.npmjs.com/), eine schnelle und unkomplizierte Implementierung von Funktionalitäten. Die Kommunikaton zwischen den Services erfolgt durch die Anbindung eines RabbitMQ Brokers, wodurch ein asynchroner Austausch von Nachrichten, auch im Falle eines Serviceausfalls, stattfinden kann.
 
-<!-- GETTING STARTED -->
+Für das Frontend wurde die [Javascript-Library React](https://reactjs.org/) verwendet. **Beschreibung wieso??**
 
-## Erste Schritte
+Der Austausch von Spieldaten zwischen dem Frontend und den jeweiligen Services wird über die [Socket.io Bibliothek](https://socket.io/) realisiert. Diese baut auf dem Websocket Protokoll auf und bietet erweiterte Funktionen, wie z.B. eine garantierte Fallback-Lösung auf HTTP-Polling oder eine automatische Reconnect-Funktion.
 
-Im folgenden wird erläutert, wie das Projekt lokal gestartet werden kann. Befolgen Sie einfach den Schritten.
+Damit die Anwendungen lokal entwickelt und getestet werden können, werden diese über [Docker sowie Docker Compose](https://www.docker.com/) verwaltet. Die Services können dadurch unabhängig zum darunterliegendem Entwicklungssystem gestartet werden und es treten keine Kompatibilitätsprobleme auf.
 
-<!-- This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps. -->
+<p align="right">(<a href="#readme-top">Zum Anfang</a>)</p>
 
-### Voraussetzungen
+### **Architektur**
+
+[![Product Name Screen Shot][architecture]](#)
+
+Die Anwendung wurde in vier Backend Services aufgeteilt, welche unabhängige Funktionen übernehmen:
+
+#### **game_service**
+
+Der _game_service_ ist für die gesamte Verwaltung von Spielen verantwortlich. Über den Service können neue Spiele gestartet oder bereits erstellten Spielen beigetreten werden. Zudem speichert der Service alle für ein Spiel benötigten Daten.
+
+#### **player_service**
+
+Der _player_service_ erstellt und speichert alle Spielerdaten. Außerdem kommuniziert dieser zwischen dem Frontend und dem _authentication_service_.
+
+#### **authentication_service**
+
+Alle Spieler authentifizieren sich über einen JWT-Token. Diese werden nur vom _authentication_service_ generiert. Jeder andere Backend Service kann den generierten Token anschließend unabhängig verfizieren.
+
+#### **rule_service**
+
+Die einem Spieler zur Verfügung stehen Spielkarten in der eigenen Hand werden vom _rule_service_ überprüft. Ein Spieler kann nach erfolgreicher Überprüfung nur noch Karten spielen, die auch den Regeln nach spielbar wären.
+
+### **Kommunikation**
+
+Zu Beginn muss sich ein Spieler mit einem gewählten Spielernamen anmelden. Für diesen Aufruf wird eine REST-Schnittstelle auf dem _player_service_ bereitsgestellt. Der _player_service_ leitet den eingegebenen Namen an eine externe API weiter, welche eine einfache Obszönitätskontrolle durchführt. Nach erfolgreicher Überprüfung werden die Daten als asynchrone Nachricht über RabbitMQ als AMQP Broker an den _authentication_service_ weitergeleitet. Dieser generiert einen JWT-Token und schickt anschließend eine AMQP Nachricht über den Broker an den _player_service_. Hervorzuheben ist hierbei, dass jeder der anderen Services die Nachricht ebenfalls empfangen kann, aber nicht auf die Nachrichten reagiert. Dem Spieler wird der eigene JWT-Token zurückgesendet und danach weiter zum eigenen Dashboard weitergeleitet.
+
+Von dem Dashboard aus kann ein Spieler ein neues Spiel erstellen, oder aber einem bereits erstelltem Spiel über die _gameId_ beitreten. Beide Aufrufe werden dabei von dem _game_service_ als REST-Schnittstellen bereitsgestellt.
+
+Bei der Verbindung zu einem Spiel stellt das Frontend eine über den JWT-Token authentifizierte Socket.io Verbindung zum _game_service_ sowie zum _rule_service_ her. Durch die auf dem Websocket Protokoll aufbauende Technologie kann eine Echtzeitkommunikation aufgebaut und alle im Spiel auftredenden Interaktionen über Events von den jeweiligen Services verarbeitet werden.
+
+Folgende AMQP und Socket.io Nachrichten werden dabei im gesamten System versendet:
+
+**AMQP**:
+
+- newPlayer
+- playerToken
+- updateWinners
+
+**Socket.io**:
+
+- player_joined
+- player_left
+- deck_size_updated
+- discard_pile_updated
+- disconnect_from_socket
+- played_card
+- get_hands
+- game_started
+- game_ended
+- disconnect
+- start_game
+- draw_card
+- play_card
+- join_game
+  <br>
+  <br>
+- check_hand
+- checked_hand
+
+<p align="right">(<a href="#readme-top">Zum Anfang</a>)</p>
+
+## **Erste Schritte**
+
+Im folgenden wird erläutert, wie das Projekt lokal gestartet werden kann.
+
+### **Voraussetzungen**
 
 Folgende Programme werden benötigt:
 
-- Docker inkl. docker-compose
+- Docker inkl. Docker-Compose
 
   ```
   https://www.docker.com/get-started/
   ```
 
-### Installation
+### **Installation**
 
 1. Das Repository klonen
    ```sh
@@ -119,83 +151,55 @@ Folgende Programme werden benötigt:
    ```sh
    cd FDDWSS22_HinzerZaitsev
    ```
-3. Skript ausführen oder die `.env.example` Dateien in jedem Backend Service in `.env` umbennenen
+3. Skript ausführen um die _.env.example_ Dateien in jedem Backend Service in _.env_ umzubennenen
+
    ```sh
    ./copy-env.sh
    ```
-4. Anwendungen mit `docker-compose` starten
+
+   oder manuell:
+
+   ```sh
+    cp ./backend/authentication_service/.env.example ./backend/authentication_service/.env
+    cp ./backend/game_service/.env.example ./backend/game_service/.env
+    cp ./backend/player_service/.env.example ./backend/player_service/.env
+    cp ./backend/rule_service/.env.example ./backend/rule_service/.env
+   ```
+
+4. Anwendungen mit _docker-compose_ starten
    ```sh
    docker-compose up -d --build
    ```
 
-<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
+Nach dem Starten der einzelnen Services kann es bis zu zehn Sekunden dauern, bis das Frontend sowie der RabbitMQ Service vollständig gestartet sind.
 
-<!-- USAGE EXAMPLES -->
+<p align="right">(<a href="#readme-top">Zum Anfang</a>)</p>
 
-## Usage
-
-<!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
+## **Verwendung**
 
 Das Frontend kann über [`http://localhost:3000`](http://localhost:3000) aufgerufen werden.
 
-### Ablauf:
+### **Ablauf**
 
 1. Eingabe Spielername
 2. Erstellung eines neuen Spiels
-3. Beitritt des Spiels über einen anderen Browser (oder Inkognito)
+3. Beitritt des Spiels über einen anderen Browser (oder über Inkognito im gleichen Browser) über die gameId
 4. Spiel starten
-5. Spiel beenden
+5. Spiel spielen
+6. Spiel beenden
 
-<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
+<p align="right">(<a href="#readme-top">Zum Anfang</a>)</p>
 
-<!-- ROADMAP -->
+## **Kontakt**
 
-<!-- ## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
-
-See the [open issues](https://github.com/antonztsv/FDDWSS22_HinzerZaitsev/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">An den Anfang</a>)</p> -->
-
-<!-- CONTRIBUTING -->
-
-<!-- ## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
-
-<!-- LICENSE -->
-
-<!-- ## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">An den Anfang</a>)</p> -->
-
-<!-- CONTACT -->
-
-## Kontakt
-
-Calvin Hinzer - calvin.hinzer@smail.th-koeln.de
-Anton Zaitsev - anton.zaitsev@smail.th-koeln.de
-
+**Calvin Hinzer** - calvin.hinzer@smail.th-koeln.de
+<br>
+**Anton Zaitsev** - anton.zaitsev@smail.th-koeln.de
+<br>
+<br>
 Projekt Link: [https://github.com/antonztsv/FDDWSS22_HinzerZaitsev](https://github.com/antonztsv/FDDWSS22_HinzerZaitsev)
 
-<p align="right">(<a href="#readme-top">An den Anfang</a>)</p>
+<p align="right">(<a href="#readme-top">Zum Anfang</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
 
@@ -221,6 +225,7 @@ Projekt Link: [https://github.com/antonztsv/FDDWSS22_HinzerZaitsev](https://gith
 [license-shield]: https://img.shields.io/github/license/antonztsv/FDDWSS22_HinzerZaitsev.svg?style=for-the-badge
 [license-url]: https://github.com/antonztsv/FDDWSS22_HinzerZaitsev/blob/master/LICENSE.txt
 [product-screenshot]: docs/images/screenshot.png
+[architecture]: docs/images/architecture.png
 
 <!-- [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [react-url]: https://reactjs.org/ -->

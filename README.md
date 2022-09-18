@@ -58,7 +58,7 @@ Gewonnen hat der Spieler, der alle Karten als erstes abgelegt hat.
 
 Die einzelnen Microservices im Backend wurden mit dem serverseitigem [Javascript Framework Node.js](https://nodejs.org/en/) umgesetzt. Dieses ermöglicht, vor allem durch die Einbindung von [externen NPM-Packages](https://www.npmjs.com/), eine schnelle und unkomplizierte Implementierung von Funktionalitäten. Die Kommunikaton zwischen den Services erfolgt durch die Anbindung eines RabbitMQ Brokers, wodurch ein asynchroner Austausch von Nachrichten, auch im Falle eines Serviceausfalls, stattfinden kann.
 
-Für das Frontend wurde die [Javascript-Library React](https://reactjs.org/) verwendet. **Beschreibung wieso??**
+Da das Team bereits Erfahrung mit dem Umgang des Frameworks `create-react-app` hatte, haben wir uns entschieden die [Javascript-Library React](https://reactjs.org/) für das Frontend zu verwenden. Dabei war es wichtig schnell und einfach wiederverwendbare UI Komponenten zu erstellen und einzusetzen.
 
 Der Austausch von Spieldaten zwischen dem Frontend und den jeweiligen Services wird über die [Socket.io Bibliothek](https://socket.io/) realisiert. Diese baut auf dem Websocket Protokoll auf und bietet erweiterte Funktionen, wie z.B. eine garantierte Fallback-Lösung auf HTTP-Polling oder eine automatische Reconnect-Funktion.
 

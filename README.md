@@ -197,6 +197,9 @@ Das Frontend kann über [`http://localhost:3000`](http://localhost:3000) aufgeru
 
 3. Beitritt des Spiels über einen anderen Browser (oder über Inkognito im gleichen Browser) über die gameId
 4. Spiel starten
+
+[![Uno Kartenspiel][lobby-screen]](#)
+
 5. Spiel spielen
 
 [![Uno Kartenspiel][game-screen]](#)

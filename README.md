@@ -210,7 +210,7 @@ Das Frontend kann über [`http://localhost:3000`](http://localhost:3000) aufgeru
 
 ## **Kontakt**
 
-**Calvin Hinzer** - calvin.hinzer@smail.th-koeln.de
+**Calvin Hinzer** - calvin_helmar.hinzer@smail.th-koeln.de
 <br>
 **Anton Zaitsev** - anton.zaitsev@smail.th-koeln.de
 <br>

@@ -12,7 +12,7 @@
     Projekt im Modul Frameworks, Dienste und Daten im Web im SS2022
     <br />
     <br />
-    <p><strong>Calvin Hinzer</strong> - <a href="mailto:calvin.hinzer@smail.th-koeln.de ">calvin.hinzer@smail.th-koeln.de </a></p>
+    <p><strong>Calvin Hinzer</strong> - <a href="mailto:calvin_helmar.hinzer@smail.th-koeln.de ">calvin_helmar.hinzer@smail.th-koeln.de </a></p>
     <p><strong>Anton Zaitsev</strong> - <a href="mailto:anton.zaitsev@smail.th-koeln.de">anton.zaitsev@smail.th-koeln.de</a></p>
     <br>
   </p>
@@ -210,7 +210,7 @@ Das Frontend kann über [`http://localhost:3000`](http://localhost:3000) aufgeru
 
 ## **Kontakt**
 
-**Calvin Hinzer** - calvin.hinzer@smail.th-koeln.de
+**Calvin Hinzer** - calvin_helmar.hinzer@smail.th-koeln.de
 <br>
 **Anton Zaitsev** - anton.zaitsev@smail.th-koeln.de
 <br>
